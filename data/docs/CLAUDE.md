@@ -199,10 +199,6 @@ This approach ensures documentation stays in sync with the codebase and reduces 
   - `curvefit`: Curve fitting with multiple frameworks (requires NumPyro)
   - `gol`: Game of Life inference
   - `localization`: Particle filter localization (requires cuda environment for visualization)
-  - `state-space`: State space models
-  - `gen2d`: 2D generative models
-  - `intuitive-physics`: Physics simulation inference
-  - `programmable-mcts`: Monte Carlo Tree Search
 
 **Usage Pattern**:
 - General commands: `pixi run <command>`

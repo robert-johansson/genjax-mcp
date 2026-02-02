@@ -420,7 +420,7 @@ V_new = jnp.where(feedback_on, V_updated, V)       # gate by feedback flag
 - `examples/simple_intro/main.py` — coin flip IS
 - `examples/simple_intro/match_to_sample.py` — MTS with RW learning
 - `examples/faircoin/core.py` — framework comparison (core only, figs need seaborn)
-- `examples/gol/core.py`, `localization/core.py`, `state_space/core.py` — import OK
+- `examples/gol/core.py`, `localization/core.py` — import OK
 
 **genjax_official (pure JAX only):**
 - `learn/examples/beta_bernoulli_importance.py` — hand-coded IS

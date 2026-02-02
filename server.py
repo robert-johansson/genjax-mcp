@@ -36,7 +36,6 @@ DOCS_MAP: dict[str, str] = {
     "inference": "src--genjax--inference--CLAUDE.md",
     "adev": "src--genjax--adev--CLAUDE.md",
     "extras": "src--genjax--extras--CLAUDE.md",
-    "gp": "src--genjax--gp--CLAUDE.md",
     "viz": "src--genjax--viz--CLAUDE.md",
     "tests": "tests--CLAUDE.md",
     "examples": "examples--CLAUDE.md",
@@ -44,12 +43,8 @@ DOCS_MAP: dict[str, str] = {
     "api_reference": "examples--simple_intro--genjax_current_api.md",
     "curvefit": "examples--curvefit--CLAUDE.md",
     "faircoin": "examples--faircoin--CLAUDE.md",
-    "gen2d": "examples--gen2d--CLAUDE.md",
     "gol": "examples--gol--CLAUDE.md",
-    "intuitive_physics": "examples--intuitive_physics--CLAUDE.md",
     "localization": "examples--localization--CLAUDE.md",
-    "programmable_mcts": "examples--programmable_mcts--CLAUDE.md",
-    "state_space": "examples--state_space--CLAUDE.md",
 }
 
 # ---------------------------------------------------------------------------
@@ -66,27 +61,19 @@ LEARN_CATEGORY_PATTERNS: dict[str, list[str]] = {
 CASE_STUDY_CATEGORIES: dict[str, list[str]] = {
     "curvefit": ["inference", "mcmc", "hmc"],
     "faircoin": ["inference", "core"],
-    "gen2d": ["inference", "core"],
     "gol": ["inference", "smc"],
-    "intuitive_physics": ["inference", "smc"],
     "localization": ["inference", "smc", "particle_filter"],
-    "programmable_mcts": ["inference", "mcts"],
     "simple_intro": ["core"],
-    "state_space": ["inference", "smc"],
 }
 
 TEST_CATEGORIES: dict[str, list[str]] = {
     "test_core": ["core", "tests"],
     "test_distributions": ["core", "tests"],
     "test_pjax": ["core", "tests"],
-    "test_state": ["core", "tests"],
     "test_mcmc": ["inference", "mcmc", "tests"],
     "test_smc": ["inference", "smc", "tests"],
     "test_vi": ["inference", "vi", "tests"],
     "test_adev": ["adev", "tests"],
-    "test_sp": ["core", "tests"],
-    "test_gp": ["gp", "tests"],
-    "test_gp_invariants": ["gp", "tests"],
     "test_linear_gaussian": ["inference", "tests"],
     "test_discrete_hmm": ["inference", "smc", "tests"],
     "test_vmap_rejuvenation_smc": ["inference", "smc", "tests"],
@@ -103,8 +90,8 @@ SOURCE_CATEGORIES: dict[str, list[str]] = {
     "core": ["source", "core"],
     "distributions": ["source", "core"],
     "pjax": ["source", "core"],
-    "sp": ["source", "core"],
     "state": ["source", "core"],
+    "timing": ["source", "core"],
     "__init__": ["source", "core"],
     "adev/__init__": ["source", "adev"],
     "inference/__init__": ["source", "inference"],
@@ -113,12 +100,9 @@ SOURCE_CATEGORIES: dict[str, list[str]] = {
     "inference/vi": ["source", "inference", "vi"],
     "extras/__init__": ["source", "extras"],
     "extras/state_space": ["source", "extras", "smc"],
-    "gp/__init__": ["source", "gp"],
-    "gp/gp": ["source", "gp"],
-    "gp/kernels": ["source", "gp"],
-    "gp/mean": ["source", "gp"],
     "viz/__init__": ["source", "viz"],
     "viz/raincloud": ["source", "viz"],
+    "viz/standard": ["source", "viz"],
 }
 
 SKIP_STEMS = {"figs", "export", "visualizations", "__init__"}
@@ -231,9 +215,9 @@ mcp = FastMCP("genjax-assistant")
 def get_documentation(topic: str) -> str:
     """Get GenJAX documentation for a topic.
 
-    Available topics: root, core, inference, adev, extras, gp, viz, tests,
-    examples, simple_intro, api_reference, curvefit, faircoin, gen2d, gol,
-    intuitive_physics, localization, programmable_mcts, state_space
+    Available topics: root, core, inference, adev, extras, viz, tests,
+    examples, simple_intro, api_reference, curvefit, faircoin, gol,
+    localization
     """
     topic = topic.strip().lower()
     if topic not in DOCS_MAP:

@@ -95,7 +95,11 @@ def generate_test_dataset(
 
 
 def generate_easy_inference_dataset(
-    seed=42, n_points=5, noise_std=0.05, param_scale=0.3, key=None  # Reduced noise to match model
+    seed=42,
+    n_points=5,
+    noise_std=0.05,
+    param_scale=0.3,
+    key=None,  # Noise to match model
 ):
     """
     Generate an easier dataset for importance sampling.
@@ -108,7 +112,7 @@ def generate_easy_inference_dataset(
     Args:
         seed: Random seed for reproducibility
         n_points: Number of data points (default: 5, fewer than standard)
-        noise_std: Observation noise std (default: 0.2, matches updated model)
+        noise_std: Observation noise std (default: 0.05, matches updated model)
         param_scale: Scale factor for parameters (default: 0.3, keeps them near 0)
         key: Optional JAX PRNG key
 
@@ -156,36 +160,41 @@ def generate_easy_inference_dataset(
 
 
 def generate_fixed_dataset(
-    n_points=10, x_min=0.0, x_max=1.0,
-    true_a=-0.211, true_b=-0.395, true_c=0.673,
-    noise_std=0.05, seed=42  # Reduced noise to match model
+    n_points=10,
+    x_min=0.0,
+    x_max=1.0,
+    true_a=-0.211,
+    true_b=-0.395,
+    true_c=0.673,
+    noise_std=0.05,
+    seed=42,  # Noise to match model
 ):
     """
     Generate a fixed dataset with specified parameters for consistent visualization.
-    
+
     Args:
         n_points: Number of data points
         x_min, x_max: Range for x values
         true_a, true_b, true_c: True polynomial coefficients
         noise_std: Standard deviation of observation noise
         seed: Random seed for noise generation
-        
+
     Returns:
         Dictionary with same structure as generate_test_dataset
     """
     key = jrand.key(seed)
-    
+
     # Generate input locations
     xs = jnp.linspace(x_min, x_max, n_points, dtype=jnp.float32)
-    
+
     # Generate clean polynomial values
     clean_ys = polyfn(xs, true_a, true_b, true_c)
-    
+
     # Add noise
     key, subkey = jrand.split(key)
     noise = noise_std * jrand.normal(subkey, shape=(n_points,))
     ys = clean_ys + noise
-    
+
     # Package results
     result = {
         "xs": xs,
@@ -198,7 +207,7 @@ def generate_fixed_dataset(
         "noise_std": noise_std,
         "clean_ys": clean_ys,
     }
-    
+
     return result
 
 
@@ -207,7 +216,7 @@ def generate_dataset_with_outliers(
     n_points=20,
     outlier_fraction=0.15,
     outlier_scale=3.0,
-    noise_std=0.05,  # Reduced noise to match model
+    noise_std=0.05,  # Noise to match model
     seed=42,
     true_a=None,
     true_b=None,
@@ -221,7 +230,7 @@ def generate_dataset_with_outliers(
         n_points: Number of data points
         outlier_fraction: Fraction of points to make outliers (default 0.15)
         outlier_scale: How many standard deviations away outliers can be (default 3.0)
-        noise_std: Base noise level for inliers (default 0.2)
+        noise_std: Base noise level for inliers (default 0.05)
         seed: Random seed (used if key is None)
         true_a, true_b, true_c: True polynomial coefficients (sampled if None)
 
@@ -286,6 +295,20 @@ def generate_dataset_with_outliers(
     }
 
     return result
+
+
+def get_reference_dataset(seed=42, n_points=20):
+    """Get the standard reference dataset for all visualizations."""
+    return generate_fixed_dataset(
+        n_points=n_points,
+        x_min=0.0,
+        x_max=1.0,
+        true_a=-0.211,
+        true_b=-0.395,
+        true_c=0.673,
+        noise_std=0.05,  # Observation noise
+        seed=seed,
+    )
 
 
 def print_dataset_summary(data_dict, name="Dataset"):

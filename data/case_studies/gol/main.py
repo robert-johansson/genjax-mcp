@@ -1,9 +1,5 @@
 import argparse
-from .figs import (
-    save_blinker_gibbs_figure,
-    save_logo_gibbs_figure,
-    save_timing_scaling_figure,
-)
+from .figs import save_all_showcase_figures
 
 
 def main():
@@ -15,9 +11,9 @@ def main():
     # Mode selection
     parser.add_argument(
         "--mode",
-        choices=["all", "blinker", "logo", "timing"],
-        default="all",
-        help="Which figures to generate (default: all)",
+        choices=["showcase"],
+        default="showcase",
+        help="Which figures to generate (default: showcase - paper figures only)",
     )
 
     # Inference parameters
@@ -64,41 +60,13 @@ def main():
     args = parser.parse_args()
 
     print("=== GenJAX Game of Life Case Study ===")
-    print(f"Mode: {args.mode}")
+    print("Mode: showcase (paper artifact)")
     print(
         f"Parameters: chain_length={args.chain_length}, flip_prob={args.flip_prob}, seed={args.seed}"
     )
 
-    if args.mode in ["all", "blinker"]:
-        print("\nGenerating blinker pattern reconstruction...")
-        save_blinker_gibbs_figure(
-            chain_length=args.chain_length, flip_prob=args.flip_prob, seed=args.seed
-        )
-
-    if args.mode in ["all", "logo"]:
-        print("\nGenerating logo pattern reconstruction...")
-        save_logo_gibbs_figure(
-            chain_length=args.chain_length,
-            flip_prob=args.flip_prob,
-            seed=args.seed,
-            small=True,  # Use small version for reasonable computation time
-            size=128,  # 128x128 logo for excellent logo preservation
-        )
-
-    if args.mode in ["all", "timing"]:
-        print("\nGenerating timing scaling analysis...")
-        print(f"Grid sizes: {args.grid_sizes}")
-        print(f"Timing repeats: {args.timing_repeats}")
-        print(f"Device: {args.device}")
-
-        save_timing_scaling_figure(
-            grid_sizes=args.grid_sizes,
-            repeats=args.timing_repeats,
-            device=args.device,
-            chain_length=args.chain_length,
-            flip_prob=args.flip_prob,
-            seed=args.seed,
-        )
+    print("\nGenerating showcase figures...")
+    save_all_showcase_figures()
 
     print("\n=== Game of Life case study complete! ===")
 

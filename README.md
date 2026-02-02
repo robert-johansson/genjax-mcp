@@ -158,11 +158,11 @@ venv/bin/python server.py
 
 ### Searchable categories
 
-`adev`, `case_studies`, `choice_maps`, `combinators`, `core`, `extras`, `gp`, `hmc`, `inference`, `mcmc`, `mcts`, `particle_filter`, `smc`, `source`, `tests`, `vi`, `viz`
+`adev`, `case_studies`, `choice_maps`, `combinators`, `core`, `extras`, `hmc`, `inference`, `mcmc`, `particle_filter`, `smc`, `source`, `tests`, `vi`, `viz`
 
 ### Documentation topics
 
-`root`, `core`, `inference`, `adev`, `extras`, `gp`, `viz`, `tests`, `examples`, `simple_intro`, `api_reference`, `curvefit`, `faircoin`, `gen2d`, `gol`, `intuitive_physics`, `localization`, `programmable_mcts`, `state_space`
+`root`, `core`, `inference`, `adev`, `extras`, `viz`, `tests`, `examples`, `simple_intro`, `api_reference`, `curvefit`, `faircoin`, `gol`, `localization`
 
 ## Updating bundled data
 
@@ -174,13 +174,12 @@ GENJAX=/path/to/genjax
 
 # Docs
 for f in CLAUDE.md src/genjax/CLAUDE.md src/genjax/inference/CLAUDE.md \
-  src/genjax/adev/CLAUDE.md src/genjax/extras/CLAUDE.md src/genjax/gp/CLAUDE.md \
+  src/genjax/adev/CLAUDE.md src/genjax/extras/CLAUDE.md \
   src/genjax/viz/CLAUDE.md tests/CLAUDE.md examples/CLAUDE.md \
   examples/simple_intro/CLAUDE.md examples/simple_intro/genjax_current_api.md \
-  examples/curvefit/CLAUDE.md examples/faircoin/CLAUDE.md examples/gen2d/CLAUDE.md \
-  examples/gol/CLAUDE.md examples/intuitive_physics/CLAUDE.md \
-  examples/localization/CLAUDE.md examples/programmable_mcts/CLAUDE.md \
-  examples/state_space/CLAUDE.md; do
+  examples/curvefit/CLAUDE.md examples/faircoin/CLAUDE.md \
+  examples/gol/CLAUDE.md \
+  examples/localization/CLAUDE.md; do
   flat=$(echo "$f" | sed 's|/|--|g')
   cp "$GENJAX/$f" data/docs/"$flat"
 done

@@ -289,8 +289,6 @@ save_publication_figure(fig, "comparison_figure.pdf")
 
 **Pending Migrations:**
 - **faircoin**: Uses local `plt.rcParams.update()` calls, should migrate to GRVS
-- **gen2d**: May have local styling (needs assessment)
-- **state_space**: May have local styling (needs assessment)
 
 **Migration Priority**: Major case studies (curvefit, localization, gol) are complete. Remaining case studies should be migrated as they are actively developed.
 

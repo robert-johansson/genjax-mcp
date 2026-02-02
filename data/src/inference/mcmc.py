@@ -280,9 +280,6 @@ def mh(
 
     Returns:
         Updated trace after MH step
-
-    State:
-        accept: Boolean indicating whether the proposal was accepted
     """
     target_gf = current_trace.get_gen_fn()
     args = current_trace.get_args()
@@ -306,7 +303,7 @@ def mh(
         current_trace,
     )
 
-    # Save acceptance as auxiliary state (can be accessed via state decorator)
+    # Save acceptance for diagnostics
     save(accept=accept)
 
     return final_trace
@@ -338,9 +335,6 @@ def mala(
 
     Returns:
         Updated trace after MALA step
-
-    State:
-        accept: Boolean indicating whether the proposal was accepted
     """
     target_gf = current_trace.get_gen_fn()
     args = current_trace.get_args()
@@ -469,9 +463,6 @@ def hmc(
 
     Returns:
         Updated trace after HMC step
-
-    State:
-        accept: Boolean indicating whether the proposal was accepted
     """
     target_gf = current_trace.get_gen_fn()
     args = current_trace.get_args()
